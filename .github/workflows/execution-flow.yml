@@ -40,8 +40,9 @@ jobs:
         run: npm run test
 
       - name: Upload test report
-        if: ${{ steps.run-tests.outcome == 'failure'}}
-        # // success, failure, cancelled, skipped
+        if: failure() && steps.run-tests.outcome == 'failure'
+        # //  == success, failure, cancelled, skipped
+        # // functions() -> failure(), success(), always(), cancelled()
         uses: actions/upload-artifact@v3
         with:
           name: test-report
@@ -80,3 +81,13 @@ jobs:
         run: ls
       - name: Deploy
         run: echo "Deploying..."
+
+  report:
+    needs: [lint, deploy]
+    if: failure()
+    runs-on: ubuntu
+    steps:
+      - name: Output Information
+        run: |
+          echo "Something Went Wrong"
+          echo ${{ github }}
