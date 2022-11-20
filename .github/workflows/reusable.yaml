@@ -1,24 +1,27 @@
-# name: Reusable Deploy
-# on:
-#   workflow_call:
-#     inputs:
-#       artifact-name:
-#         discription: The name of the deployable artifact files
-#         required: false
-#         default: dist
-#         type: string
+name: Reusable Deploy
+on:
+  workflow_call:
+    inputs:
+      artifact-name:
+        discription: The name of the deployable artifact files
+        required: false
+        default: dist
+        type: string
+    # secrets:
+    #   some-secret:
+    #     required: true
 
-# jobs:
-#   deploy:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Get Code
-#         uses: actions/download-artifact@v3
-#         with:
-#           name: ${{ inputs.artifact-name }}
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ inputs.artifact-name }}
 
-#       - name: List files
-#         run: ls
+      - name: List files
+        run: ls
 
-#       - name: Output Information
-#         run: echo "Deplying & Uploading ..."
+      - name: Output Information
+        run: echo "Deplying & Uploading ..."
