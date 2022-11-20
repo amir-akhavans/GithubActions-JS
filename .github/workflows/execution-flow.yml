@@ -36,10 +36,12 @@ jobs:
         run: npm ci
 
       - name: Test code
+        id: run-tests
         run: npm run test
 
       - name: Upload test report
-        # if:
+        if: ${{ steps.run-tests.outcome == 'failure'}}
+        # // success, failure, cancelled, skipped
         uses: actions/upload-artifact@v3
         with:
           name: test-report
