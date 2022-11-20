@@ -7,6 +7,12 @@
 #       matrix:
 #         node-version: [12, 14, 16]
 #         operation-system: [ubuntu-latest, windows-latest]
+#         include:
+#           - node-version: 18
+#             operating-sysyem: ubuntu-latest
+#         exclude:
+#           - node-version: 12
+#             operationg-system: windows-latest
 #     runs-on: ${{ matrix.operation-system }}
 #     steps:
 #       - name: Get Code
